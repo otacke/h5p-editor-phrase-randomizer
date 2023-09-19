@@ -139,7 +139,25 @@ export default class PhraseRandomizerSolutionsList {
         });
       });
 
-      // TODO: re-ordered should also call setTitleBarLabels
+      const solutionsListId = this.solutionsListInstance.getId();
+      const observer = new MutationObserver((mutations) => {
+        const targets = mutations.map((mutation) => mutation.target);
+
+        // Prevent loops, as we modify the labels inside the observed DOM node
+        if (
+          targets.some((target) => !!target.closest(`#${solutionsListId}`)) &&
+          targets.every((target) => target.tagName.toLowerCase() !== 'label')
+        ) {
+          window.requestAnimationFrame(() => {
+            this.setTitleBarLabels();
+          });
+        }
+      });
+
+      observer.observe(
+        this.solutionsListInstance.parent.$content.get(0),
+        { childList: true, subtree: true }
+      );
     }
 
     // Errors (or add your own)
