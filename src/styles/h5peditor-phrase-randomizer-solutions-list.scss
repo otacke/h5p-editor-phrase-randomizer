@@ -1,0 +1,13 @@
+.h5peditor-phrase-randomizer-solutions-list {
+  .field-name-solutions {
+    .content {
+      &.error {
+        background-color: #f7d0d0;
+      }
+
+      &> .field.list > label {
+        display: none;
+      }
+    }
+  }
+}

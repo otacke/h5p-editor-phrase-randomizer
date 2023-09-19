@@ -1,0 +1,53 @@
+.h5p-editor-phrase-randomizer-textual-editor {
+
+  .h5p-editor-phrase-randomizer-textual-editor-textarea {
+    resize: none;
+  }
+
+  .h5p-help-text {
+    background-color: #f9f9d8;
+    border: 1px solid #ffde78;
+    padding: 1rem;
+
+    .header {
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      .title {
+        font-size: 1.3em;
+        font-weight: bold;
+
+        &::before {
+          content: "\e909";
+          font-family: "H5P", sans-serif;
+          font-size: 1.7em;
+          font-weight: normal;
+          margin-left: -0.3em;
+          position: relative;
+          top: 0.2em;
+        }
+      }
+    }
+
+    .body {
+      .example {
+        background-color: #d9fac3;
+        border: 1px solid #bbde98;
+        display: flex;
+        margin-top: 1rem;
+        width: 100%;
+
+        .example-title {
+          padding: 1rem;
+          font-weight: bold;
+        }
+
+        .example-text {
+          background-color: #f6fef1;
+          padding: 1rem;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

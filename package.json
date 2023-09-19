@@ -1,0 +1,47 @@
+{
+  "name": "h5peditor-phrase-randomizer",
+  "version": "1.0.0",
+  "description": "Editor widget for Phrase Randomizer",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js'",
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otacke/h5p-editor-phrase-randomizer.git"
+  },
+  "keywords": [
+    "h5p",
+    "editor"
+  ],
+  "author": "Oliver Tacke",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "eslint": "^8.47.0",
+    "eslint-plugin-jsdoc": "^46.4.6",
+    "mini-css-extract-plugin": "^2.7.6",
+    "regenerator-runtime": "^0.14.0",
+    "sass": "^1.65.1",
+    "sass-loader": "^13.3.2",
+    "stylelint": "^15.10.2",
+    "stylelint-config-recommended": "^13.0.0",
+    "stylelint-config-recommended-scss": "^12.0.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead",
+  "dependencies": {
+    "color": "^4.2.3",
+    "he": "^1.2.0",
+    "showdown": "^2.1.0"
+  }
+}
