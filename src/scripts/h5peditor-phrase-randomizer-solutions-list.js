@@ -126,12 +126,20 @@ export default class PhraseRandomizerSolutionsList {
           this.handleSegmentAdded(segmentIndex, segmentInfo.options);
         });
 
-        this.setTitleBarLabels();
+        window.requestAnimationFrame(() => {
+          this.setTitleBarLabels();
+        });
       });
 
       this.solutionsListInstance.on('removedItem', () => {
         this.solutionSelectors = this.getSolutionSelectors() ?? [];
+
+        window.requestAnimationFrame(() => {
+          this.setTitleBarLabels();
+        });
       });
+
+      // TODO: re-ordered should also call setTitleBarLabels
     }
 
     // Errors (or add your own)
