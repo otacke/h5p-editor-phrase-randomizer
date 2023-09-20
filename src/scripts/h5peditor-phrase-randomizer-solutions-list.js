@@ -171,10 +171,18 @@ export default class PhraseRandomizerSolutionsList {
     document.body.append(this.confirmationDialog.getDOM());
   }
 
+  /**
+   * Get number of solutions/segments.
+   * @returns {number} Number of solutions/segments.
+   */
   getSolutionsLength() {
     return this.solutionSelectors.length;
   }
 
+  /**
+   * Get indicators that could help to guess a relationship between a solution and options.
+   * @returns {object} Indicators.
+   */
   getSolutionIndicators() {
     return this.solutionSelectors
       .map((selector) => {
@@ -222,6 +230,10 @@ export default class PhraseRandomizerSolutionsList {
     });
   }
 
+  /**
+   * Reset all solutions.
+   * @param {object[]} oldSolutions Old solutions to be recreated if possible.
+   */
   async reset(oldSolutions) {
     await this.listInterface.reset();
 
@@ -306,6 +318,10 @@ export default class PhraseRandomizerSolutionsList {
     this.parent.ready(ready);
   }
 
+  /**
+   * Get all solution selectors.
+   * @returns {object[]} All solution selectors.
+   */
   getSolutionSelectors() {
     const children = [];
 
@@ -355,6 +371,11 @@ export default class PhraseRandomizerSolutionsList {
     });
   }
 
+  /**
+   * Handle user added a segment.
+   * @param {number} segmentIndex Index of segment that was added.
+   * @param {object[]} options Options.
+   */
   handleSegmentAdded(segmentIndex, options = []) {
     this.solutionSelectors.forEach((selector) => {
       if (segmentIndex < selector.getLength()) {
@@ -373,7 +394,7 @@ export default class PhraseRandomizerSolutionsList {
   }
 
   /**
-   * Set title bar labels, notthing that H5P core does
+   * Set title bar labels, nothing that H5P core does (!?)
    */
   setTitleBarLabels() {
     const titleBarDOMs = [...this.fieldInstance.$content.get(0)

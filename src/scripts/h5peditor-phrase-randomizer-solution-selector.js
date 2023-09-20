@@ -71,10 +71,18 @@ export default class PhraseRandomizerSolutionSelector {
     this.$container.get(0).remove();
   }
 
+  /**
+   * Get number of fields in array.
+   * @returns {number} Number of fields in array.
+   */
   getLength() {
     return this.selectorArray.getLength();
   }
 
+  /**
+   * Get labels.
+   * @returns {string[]} Labels of all fields.
+   */
   getLabels() {
     return this.selectorArray.getLabels();
   }
@@ -99,6 +107,10 @@ export default class PhraseRandomizerSolutionSelector {
     return solution[index] ?? '-1';
   }
 
+  /**
+   * Set a solution value
+   * @param {string|string[]} value Value to set.
+   */
   setSolution(value) {
     if (Array.isArray(value)) {
       value = value.join(',');
@@ -109,6 +121,10 @@ export default class PhraseRandomizerSolutionSelector {
     this.validate();
   }
 
+  /**
+   * Update solution.
+   * @param {object} data Data to update with.
+   */
   updateSolution(data) {
     let currentSolution = this.getSolution()
       .split(',')
@@ -123,10 +139,19 @@ export default class PhraseRandomizerSolutionSelector {
     this.setSolution(currentSolution.join(','));
   }
 
-  updateSelectFieldTitle(index, title) {
-    this.selectorArray.updateTitle(index, title);
+  /**
+   * Update title of a select field.
+   * @param {number} segmentIndex Index of segment to update field for.
+   * @param {string} title Title to set.
+   */
+  updateSelectFieldTitle(segmentIndex, title) {
+    this.selectorArray.updateTitle(segmentIndex, title);
   }
 
+  /**
+   * Update options of a select field.
+   * @param {object} params Parameters.
+   */
   updateSelectFieldOptions(params = {}) {
     const currentlySelectedIndex = parseInt(
       this.getSolution(params.segmentIndex) ?? -1
@@ -159,19 +184,37 @@ export default class PhraseRandomizerSolutionSelector {
     );
   }
 
+  /**
+   * Update particular option of a select field.
+   * @param {number} segmentIndex Segment index of field.
+   * @param {optionIndex} optionIndex Option index where change is due.
+   * @param {string} label Label to set.
+   */
   updateSelectFieldOption(segmentIndex, optionIndex, label) {
     this.selectorArray.updateOption(segmentIndex, optionIndex, label);
   }
 
+  /**
+   * Add a select field.
+   * @param {number} index Index of segment/select field.
+   */
   addSelectField(index) {
     this.selectorArray.addField(index);
   }
 
+  /**
+   * Remove a select field.
+   * @param {number} index Index of segment/select field to be removed.
+   */
   removeSelectField(index) {
     this.selectorArray.removeField(index);
     this.setSolution(this.selectorArray.getSolution());
   }
 
+  /**
+   * Move select fields.
+   * @param {object[]} moved Data about moved stuff ({from: number, to: number}[]).
+   */
   moveSelectFields(moved) {
     this.selectorArray.moveFields(moved);
     const solution = this.selectorArray.getSolution();

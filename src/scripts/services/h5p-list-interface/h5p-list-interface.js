@@ -9,11 +9,8 @@ export default class H5PListInterface {
       return; // We need a list ...
     }
 
-    /*
-     * TODO: Clean up
-     */
     this.segmentsList = list;
-    this.optionsLists = [];
+    this.optionsLists = []; // Could probably have been simpler without this
 
     this.callbacks = Util.extend({
       onSegmentAdded: () => {},
@@ -56,6 +53,10 @@ export default class H5PListInterface {
     );
   }
 
+  /**
+   * Reset.
+   * @async
+   */
   async reset() {
     const wait = new Promise((resolve) => {
       window.setTimeout(() => {
@@ -63,15 +64,19 @@ export default class H5PListInterface {
         this.segments.reset();
 
         this.segmentsList.forEachChild((child) => {
-          this.segments.addSegment(child); // TODO: Reset selection index
+          this.segments.addSegment(child);
         });
         resolve();
-      }, 1000); // TODO: This is only a workaround (!)
+      }, 1000); // TODO: This should remain a workaround: Determine what causes the need to stall things
     });
 
     await wait;
   }
 
+  /**
+   * Handle user added a segment with options.
+   * @param {object} [data] Data.
+   */
   handleSegmentAdded(data = {}) {
     this.optionsLists.push(new OptionsList(data.optionsList));
 
@@ -79,6 +84,10 @@ export default class H5PListInterface {
     this.callbacks.onSegmentAdded(data);
   }
 
+  /**
+   * Handle user removed a segment with options.
+   * @param {object} [data] Data.
+   */
   handleSegmentRemoved(data = {}) {
     this.optionsLists.splice(data.segmentIndex, 1);
 
@@ -86,12 +95,20 @@ export default class H5PListInterface {
     this.callbacks.onSegmentRemoved(data);
   }
 
+  /**
+   * Handle user moved a segment.
+   * @param {object} [data] Data.
+   */
   handleSegmentMoved(data = {}) {
     this.update(data.moved);
     data.options = this.getSegmentOptions(data.segmentIndex);
     this.callbacks.onSegmentMoved(data);
   }
 
+  /**
+   * Handle user added an option to a segment.
+   * @param {object} [data] Data.
+   */
   handleOptionAdded(data = {}) {
     this.updateOptions();
     data.options = this.getSegmentOptions(data.segmentIndex);
@@ -99,28 +116,48 @@ export default class H5PListInterface {
     this.callbacks.onOptionAdded(data);
   }
 
+  /**
+   * Handle user removed an option to a segment.
+   * @param {object} [data] Data.
+   */
   handleOptionRemoved(data = {}) {
     this.updateOptions();
     data.options = this.getSegmentOptions(data.segmentIndex);
     this.callbacks.onOptionRemoved(data);
   }
 
+  /**
+   * Handle user removed an option in a segment.
+   * @param {object} [data] Data.
+   */
   handleOptionMoved(data = {}) {
     this.updateOptions();
     data.options = this.getSegmentOptions(data.segmentIndex);
     this.callbacks.onOptionMoved(data);
   }
 
+  /**
+   * Handle user changed the label of an option.
+   * @param {object} [data] Data.
+   */
   handleOptionLabelChanged(data) {
     this.updateOptions();
     data.options = this.getSegmentOptions(data.segmentIndex);
     this.callbacks.onOptionLabelChanged(data);
   }
 
+  /**
+   * Handle user changed the title of a segment.
+   * @param {string} title Title of segment.
+   */
   handleTitleChanged(title) {
     this.callbacks.onTitleChanged(title);
   }
 
+  /**
+   * Update list of segment children if segments have been moved.
+   * @param {object} moved Data about moved stuff ({from: number, to: number}[]).
+   */
   update(moved) {
     const optionsListsClone = [...this.optionsLists];
     moved.forEach((move) => {
@@ -128,17 +165,25 @@ export default class H5PListInterface {
     });
   }
 
+  /**
+   * Update options if their position changed in any way.
+   */
   updateOptions() {
     this.optionsLists.forEach((optionslist) => {
       optionslist.update();
     });
   }
 
-  getSegmentTitle(index) {
+  /**
+   * Get title of particular segment.
+   * @param {number} segmentIndex Index of segment.
+   * @returns {string} Title of particular segment.
+   */
+  getSegmentTitle(segmentIndex) {
     let title = null;
 
-    this.segmentsList.forEachChild((child, i) => {
-      if (title !== null || i !== index) {
+    this.segmentsList.forEachChild((child, index) => {
+      if (title !== null || index !== segmentIndex) {
         return;
       }
 
@@ -159,22 +204,31 @@ export default class H5PListInterface {
     return title;
   }
 
-  getSegmentOptions(index) {
-    const options = this.optionsLists[index]?.getLabels() ?? [];
+  /**
+   * Get segment options for particular segment.
+   * @param {number} segmentIndex Segment index.
+   * @returns {object} Segment options.
+   */
+  getSegmentOptions(segmentIndex) {
+    const options = this.optionsLists[segmentIndex]?.getLabels() ?? [];
 
     return {
-      title: this.getSegmentTitle(index),
+      title: this.getSegmentTitle(segmentIndex),
       options: options.map((label) => ({ label: label }))
     };
   }
 
+  /**
+   * Get all information on segments.
+   * @returns {object[]} All information on segments.
+   */
   getCompleteInformation() {
     const information = [];
 
-    for (let i = 0; i < this.optionsLists.length; i++) {
+    for (let index = 0; index < this.optionsLists.length; index++) {
       information.push({
-        title: this.getSegmentTitle(i),
-        options: this.getSegmentOptions(i)
+        title: this.getSegmentTitle(index),
+        options: this.getSegmentOptions(index)
       });
     }
 
