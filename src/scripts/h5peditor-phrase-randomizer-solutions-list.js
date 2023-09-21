@@ -41,6 +41,9 @@ export default class PhraseRandomizerSolutionsList {
     );
     this.fieldInstance.appendTo(this.$container);
 
+    // Listen to changes of mode select field, what ShowWhen normally does.
+    this.addModeListener();
+
     this.solutionSelectors = this.getSolutionSelectors() ?? [];
 
     this.segmentList = this.parent.children
@@ -169,6 +172,34 @@ export default class PhraseRandomizerSolutionsList {
     });
     this.confirmationDialog.hide();
     document.body.append(this.confirmationDialog.getDOM());
+  }
+
+  /**
+   * Add listener for mode select field.
+   * Does what the showWhen widget would do, but H5P doesn't allow multiple
+   * widgets per field.
+   */
+  addModeListener() {
+    const modeToggleField = this.parent.children.find((child) => {
+      return (
+        child instanceof H5PEditor.Select &&
+        child.field?.name === 'mode'
+      );
+    });
+
+    if (modeToggleField) {
+      const toggleSolutionsListVisibility = () => {
+        this.$container.get(0).classList.toggle(
+          'display-none', modeToggleField.value === 'free'
+        );
+      };
+
+      modeToggleField.changes.push(() => {
+        toggleSolutionsListVisibility();
+      });
+
+      toggleSolutionsListVisibility();
+    }
   }
 
   /**

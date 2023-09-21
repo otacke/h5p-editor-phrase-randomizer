@@ -1,4 +1,8 @@
 .h5peditor-phrase-randomizer-solutions-list {
+  &.display-none {
+    display: none;
+  }
+
   .field-name-solutions {
     .content {
       &.error {
