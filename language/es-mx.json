@@ -1,0 +1,14 @@
+{
+  "libraryStrings": {
+    "l10n.confirmSolutionChangedHeader": "Some solutions were changed",
+    "l10n.helpTextExampleText": "strawberry\nraspberry\ncloudberry\ntitle=berry name\ncolor=#c69e3b\n\npie\nyoghurt\njam",
+    "l10n.helpTextTitleExample": "Example",
+    "l10n.segment": "segment @number",
+    "l10n.someOptionsNotAssignable": "Some options that were changed could not be assigned to the solutions. Please check your solutions:",
+    "l10n.solution": "solution @number",
+    "l10n.helpTextIntroduction": "Create blocks of segments, where each block is separated by an empty line.\nIn each block each line represents an option for the segment.\nThe title can optionally be set by starting the line with _title=_ followed by the title.\nThe optional segment background color can be set by starting the line with _color=_ followed by a color code, e.g. rgb(255, 0, 0) or #ff0000.",
+    "l10n.helpTextTitleMain": "Important instructions",
+    "l10n.label": "label: \"@text\"",
+    "l10n.ok": "OK"
+  }
+}
