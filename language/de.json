@@ -1,0 +1,14 @@
+{
+  "libraryStrings": {
+    "l10n.someOptionsNotAssignable": "Einige Optionen, die geändert wurden, konnten keiner Lösung zugeordnet werden. Bitte prüfe deine Lösungen:",
+    "l10n.solution": "Lösung @number",
+    "l10n.segment": "Segment @number",
+    "l10n.label": "Beschriftung: \"@text\"",
+    "l10n.confirmSolutionChangedHeader": "Einige Lösungen wurden geändert",
+    "l10n.ok": "OK",
+    "l10n.helpTextTitleMain": "Wichtige Hinweise",
+    "l10n.helpTextTitleExample": "Beispiel",
+    "l10n.helpTextIntroduction": "Erstelle Blöcke mit Segmenten, wobei jeder Block durch eine Leerzeile getrennt ist.\nIn jedem Block steht jede Zeile für eine Option des Segments.\nDer Segmenttitel kann optional gesetzt werden, indem die Zeile mit _title=_ beginnt und dann vom Titel gefolgt wird.\nDie Hintergrundfarbe des Segments kann gesetzt werden, indem die Zeile mit _color=_ beginnt und dann von einem Farbcode gefolgt wird, z. B. rgb(255, 0, 0) oder #ff0000.",
+    "l10n.helpTextExampleText": "Erdbeere\nHimbeere\nMoltebeere\ntitle=Beerenname\ncolor=#c69e3b\n\nKuchen\nJoghurt\nMarmelade"
+  }
+}
