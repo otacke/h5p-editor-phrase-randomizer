@@ -15,7 +15,7 @@ export default class PhraseRandomizerSolutionSelectorArray {
     this.params = Util.extend({}, params);
 
     this.callbacks = Util.extend({
-      onChanged: () => {}
+      onChanged: () => {},
     }, callbacks);
 
     this.selectorFields = [];
@@ -70,8 +70,8 @@ export default class PhraseRandomizerSolutionSelectorArray {
       {
         onChanged: (data) => {
           this.callbacks.onChanged(data);
-        }
-      }
+        },
+      },
     );
     this.selectorFields.push(newField);
     this.dom.append(newField.getDOM());

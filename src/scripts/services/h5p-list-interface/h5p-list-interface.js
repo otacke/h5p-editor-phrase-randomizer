@@ -2,8 +2,18 @@ import Util from '@services/util.js';
 import OptionsList from './options-list.js';
 import SegmentsList from './segments-list.js';
 
+/**
+ * @constant {number} WORKAROUND_TIMEOUT_MS Workaround timeout in ms.
+ */
+const WORKAROUND_TIMEOUT_MS = 1000;
+
 export default class H5PListInterface {
 
+  /**
+   * Constructor.
+   * @param {H5PEditor.List} list List.
+   * @param {object} [callbacks] Callbacks.
+   */
   constructor(list, callbacks = {}) {
     if (!(list instanceof H5PEditor.List)) {
       return; // We need a list ...
@@ -19,7 +29,7 @@ export default class H5PListInterface {
       onOptionAdded: () => {},
       onOptionRemoved: () => {},
       onOptionLabelChanged: () => {},
-      onTitleChanged: () => {}
+      onTitleChanged: () => {},
     }, callbacks);
 
     this.segments = new SegmentsList(
@@ -48,8 +58,8 @@ export default class H5PListInterface {
         },
         onTitleChanged: (title) => {
           this.handleTitleChanged(title);
-        }
-      }
+        },
+      },
     );
   }
 
@@ -67,7 +77,7 @@ export default class H5PListInterface {
           this.segments.addSegment(child);
         });
         resolve();
-      }, 1000); // TODO: This should remain a workaround: Determine what causes the need to stall things
+      }, WORKAROUND_TIMEOUT_MS); // TODO: Should remain a workaround: Determine what causes the need to stall things
     });
 
     await wait;
@@ -195,7 +205,7 @@ export default class H5PListInterface {
       }
 
       const titleInstance = (child.children ?? []).find(
-        (child) => child.field?.name === 'title'
+        (child) => child.field?.name === 'title',
       );
 
       title = titleInstance?.$input?.get(0).value ?? null;
@@ -214,7 +224,7 @@ export default class H5PListInterface {
 
     return {
       title: this.getSegmentTitle(segmentIndex),
-      options: options.map((label) => ({ label: label }))
+      options: options.map((label) => ({ label: label })),
     };
   }
 
@@ -228,7 +238,7 @@ export default class H5PListInterface {
     for (let index = 0; index < this.optionsLists.length; index++) {
       information.push({
         title: this.getSegmentTitle(index),
-        options: this.getSegmentOptions(index)
+        options: this.getSegmentOptions(index),
       });
     }
 

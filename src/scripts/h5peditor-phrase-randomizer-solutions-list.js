@@ -32,12 +32,12 @@ export default class PhraseRandomizerSolutionsList {
 
     // DOM
     this.$container = H5P.jQuery('<div>', {
-      class: 'h5peditor-phrase-randomizer-solutions-list'
+      class: 'h5peditor-phrase-randomizer-solutions-list',
     });
 
     // Instantiate original field
     this.fieldInstance = new H5PEditor.widgets[this.field.type](
-      this.parent, this.field, this.params, this.setValue
+      this.parent, this.field, this.params, this.setValue,
     );
     this.fieldInstance.appendTo(this.$container);
 
@@ -68,7 +68,7 @@ export default class PhraseRandomizerSolutionsList {
           selector.updateSelectFieldOptions({
             segmentIndex: data.segmentIndex,
             options: data.options,
-            addedOptionIndex: data.optionIndex
+            addedOptionIndex: data.optionIndex,
           });
         });
       },
@@ -77,7 +77,7 @@ export default class PhraseRandomizerSolutionsList {
           selector.updateSelectFieldOptions({
             segmentIndex: data.segmentIndex,
             options: data.options,
-            removedOptionIndex: data.optionIndex
+            removedOptionIndex: data.optionIndex,
           });
         });
       },
@@ -86,7 +86,7 @@ export default class PhraseRandomizerSolutionsList {
           selector.updateSelectFieldOptions({
             segmentIndex: data.segmentIndex,
             options: data.options,
-            moves: data.moved
+            moves: data.moved,
           });
         });
       },
@@ -94,10 +94,10 @@ export default class PhraseRandomizerSolutionsList {
         this.solutionSelectors.forEach((selector) => {
           selector.updateSelectFieldOptions({
             segmentIndex: data.segmentIndex,
-            options: data.options
+            options: data.options,
           });
           selector.updateSelectFieldOption(
-            data.segmentIndex, data.optionIndex, data.text
+            data.segmentIndex, data.optionIndex, data.text,
           );
         });
       },
@@ -105,7 +105,7 @@ export default class PhraseRandomizerSolutionsList {
         this.solutionSelectors.forEach((selector) => {
           selector.updateSelectFieldTitle(data.segmentIndex, data.title);
         });
-      }
+      },
     });
 
     // Relay changes
@@ -116,7 +116,7 @@ export default class PhraseRandomizerSolutionsList {
     }
 
     this.solutionsListInstance = this.fieldInstance.children?.find?.(
-      (field) => field.getName?.() === 'solutions'
+      (field) => field.getName?.() === 'solutions',
     );
     if (this.solutionsListInstance) {
       this.solutionsListInstance.on('addedItem', () => {
@@ -159,7 +159,7 @@ export default class PhraseRandomizerSolutionsList {
 
       observer.observe(
         this.solutionsListInstance.parent.$content.get(0),
-        { childList: true, subtree: true }
+        { childList: true, subtree: true },
       );
     }
 
@@ -168,7 +168,7 @@ export default class PhraseRandomizerSolutionsList {
 
     // Confirmation Dialog
     this.confirmationDialog = new ConfirmationDialog({
-      instance: this
+      instance: this,
     });
     this.confirmationDialog.hide();
     document.body.append(this.confirmationDialog.getDOM());
@@ -190,7 +190,7 @@ export default class PhraseRandomizerSolutionsList {
     if (modeToggleField) {
       const toggleSolutionsListVisibility = () => {
         this.$container.get(0).classList.toggle(
-          'display-none', modeToggleField.value === 'free'
+          'display-none', modeToggleField.value === 'free',
         );
       };
 
@@ -224,7 +224,7 @@ export default class PhraseRandomizerSolutionsList {
           return ({
             segmentIndex: index,
             selectedIndex: parseInt(value),
-            label: labels[index]
+            label: labels[index],
           });
         });
       })
@@ -247,7 +247,7 @@ export default class PhraseRandomizerSolutionsList {
 
     const listId = solutionsList.getId();
     const listEditorDOMs = [...this.fieldInstance.$content.get(0).querySelectorAll(
-      `#${listId} .h5p-li`
+      `#${listId} .h5p-li`,
     )];
 
     solutionsList.removeAllItems();
@@ -316,7 +316,7 @@ export default class PhraseRandomizerSolutionsList {
       const segmentText = this.dictionary.get('l10n.segment')
         .replace(/@number/g, error.segmentIndex + 1);
       const labelText = Util.purifyHTML(
-        this.dictionary.get('l10n.label').replace(/@text/g, error.label)
+        this.dictionary.get('l10n.label').replace(/@text/g, error.label),
       );
 
       return `${solutionText}, ${segmentText}, ${labelText}`;
@@ -330,8 +330,8 @@ export default class PhraseRandomizerSolutionsList {
         hideCancel: true,
         headerText: this.dictionary.get('l10n.confirmSolutionChangedHeader'),
         dialogText: dialogText,
-        confirmText: this.dictionary.get('l10n.ok')
-      }
+        confirmText: this.dictionary.get('l10n.ok'),
+      },
     );
     this.confirmationDialog.show();
   }
@@ -417,7 +417,7 @@ export default class PhraseRandomizerSolutionsList {
       selector.updateSelectFieldOptions({
         segmentIndex: segmentIndex,
         options: options,
-        optionIndex: -1
+        optionIndex: -1,
       });
     });
 

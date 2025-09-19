@@ -25,14 +25,14 @@ export default class PhraseRandomizerSolutionSelector {
       {
         onChanged: (data) => {
           this.updateSolution(data);
-        }
-      }
+        },
+      },
     );
     this.dom.append(this.selectorArray.getDOM());
 
     // Instantiate original field
     this.fieldInstance = new H5PEditor.widgets[this.field.type](
-      this.parent, this.field, this.params, this.setValue
+      this.parent, this.field, this.params, this.setValue,
     );
 
     this.fieldInstance.appendTo(H5P.jQuery(this.dom));
@@ -154,7 +154,7 @@ export default class PhraseRandomizerSolutionSelector {
    */
   updateSelectFieldOptions(params = {}) {
     const currentlySelectedIndex = parseInt(
-      this.getSolution(params.segmentIndex) ?? -1
+      this.getSolution(params.segmentIndex) ?? -1,
     ) ?? -1;
 
     let selectedIndex = currentlySelectedIndex;
@@ -168,7 +168,7 @@ export default class PhraseRandomizerSolutionSelector {
     }
     else if (params.moves) {
       const relevantMove = params.moves.find(
-        (move) => move.from === currentlySelectedIndex
+        (move) => move.from === currentlySelectedIndex,
       );
 
       if (relevantMove) {
@@ -180,7 +180,7 @@ export default class PhraseRandomizerSolutionSelector {
     }
 
     this.selectorArray.updateOptions(
-      params.segmentIndex, params.options, selectedIndex
+      params.segmentIndex, params.options, selectedIndex,
     );
   }
 

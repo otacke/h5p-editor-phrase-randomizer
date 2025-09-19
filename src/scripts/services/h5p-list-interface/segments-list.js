@@ -56,7 +56,7 @@ export default class SegmentsList {
           from: indexFrom,
           to: this.listChildren.findIndex((child) => {
             return child.children[1] === listItem.list;
-          })
+          }),
         });
       })
       .filter((move) => move.from !== move.to);
@@ -147,7 +147,7 @@ export default class SegmentsList {
       titleField.change((title) => {
         this.callbacks.onTitleChanged({
           segmentIndex: segmentIndex,
-          title: title
+          title: title,
         });
       });
 
@@ -155,7 +155,7 @@ export default class SegmentsList {
 
       this.callbacks.onSegmentAdded({
         segmentIndex: this.listItems.length - 1,
-        optionsList: optionsList
+        optionsList: optionsList,
       });
     }
   }
@@ -170,7 +170,7 @@ export default class SegmentsList {
     this.update();
 
     this.callbacks.onSegmentRemoved({
-      segmentIndex: index
+      segmentIndex: index,
     });
   }
 
@@ -251,7 +251,7 @@ export default class SegmentsList {
           this.update();
 
           this.callbacks.onSegmentMoved({
-            moved: segmentsMoved
+            moved: segmentsMoved,
           });
         }
 
@@ -277,7 +277,7 @@ export default class SegmentsList {
 
             this.callbacks.onOptionAdded({
               segmentIndex: index,
-              optionIndex: changes.added
+              optionIndex: changes.added,
             });
 
             return;
@@ -287,7 +287,7 @@ export default class SegmentsList {
 
             this.callbacks.onOptionRemoved({
               segmentIndex: index,
-              optionIndex: changes.removed
+              optionIndex: changes.removed,
             });
 
             return;
@@ -297,7 +297,7 @@ export default class SegmentsList {
 
             this.callbacks.onOptionMoved({
               segmentIndex: index,
-              moved: changes.moved
+              moved: changes.moved,
             });
           }
         });
@@ -348,7 +348,7 @@ export default class SegmentsList {
     this.callbacks.onOptionLabelChanged({
       segmentIndex: this.getSegmentIndexForOption(option),
       optionIndex: option.getIndex(),
-      text: option.getLabel()
+      text: option.getLabel(),
     });
   }
 }

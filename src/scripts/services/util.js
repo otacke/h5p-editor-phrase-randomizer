@@ -99,7 +99,7 @@ export default class Util {
     }
 
     const instanceIndex = parent.field.fields.findIndex(
-      (child) => child.name === instanceFieldName
+      (child) => child.name === instanceFieldName,
     );
 
     return (instanceIndex !== -1) ? parent.children[instanceIndex] : false;

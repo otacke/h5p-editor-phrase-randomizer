@@ -50,7 +50,7 @@ export default class ConfirmationDialog {
 
     callbacks = Util.extend({
       onConfirmed: () => {},
-      onCanceled: () => {}
+      onCanceled: () => {},
     }, callbacks);
 
     // Clean up old dialog

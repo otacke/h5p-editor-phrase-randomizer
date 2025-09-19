@@ -91,7 +91,7 @@ export default class OptionsList {
     const result = {
       added: -1,
       removed: -1,
-      moved: []
+      moved: [],
     };
 
     result.added = (currentChildren.length > this.listChildren.length) ?

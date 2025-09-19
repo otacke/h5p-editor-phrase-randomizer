@@ -20,17 +20,17 @@ export default class PhraseRandomizerTextualEditor {
     // DOM
     this.inputField = document.createElement('textarea');
     this.inputField.classList.add(
-      'h5p-editor-phrase-randomizer-textual-editor-textarea'
+      'h5p-editor-phrase-randomizer-textual-editor-textarea',
     );
     this.inputField.setAttribute('id', list.getId());
     if (list.getDescriptionId()) {
       this.inputField.setAttribute('aria-describedby', list.getDescriptionId());
     }
     this.inputField.setAttribute(
-      'rows', PhraseRandomizerTextualEditor.DEFAULT_ROWS
+      'rows', PhraseRandomizerTextualEditor.DEFAULT_ROWS,
     );
     this.inputField.setAttribute(
-      'placeholder', this.dictionary.get('l10n.helpTextExampleText')
+      'placeholder', this.dictionary.get('l10n.helpTextExampleText'),
     );
 
     this.inputField.addEventListener('change', () => {
@@ -90,7 +90,7 @@ export default class PhraseRandomizerTextualEditor {
       }
       else if (textline.indexOf('color=') === 0) {
         newItem.colorBackground = Util.getRGBColorCode(
-          textline.substring('color='.length)
+          textline.substring('color='.length),
         ) ?? PhraseRandomizerTextualEditor.DEFAULT_COLOR;
       }
       else {
@@ -119,7 +119,7 @@ export default class PhraseRandomizerTextualEditor {
 
     const labels = Util.findWidgetInstance(item, 'options')?.getValue() ?? [''];
     lineParts.push(
-      labels.map((item) => Util.purifyHTML(item)).join('\n')
+      labels.map((item) => Util.purifyHTML(item)).join('\n'),
     );
 
     const title = Util.findWidgetInstance(item, 'title')?.value;
@@ -128,7 +128,7 @@ export default class PhraseRandomizerTextualEditor {
     }
 
     const backgroundColor = Util.findWidgetInstance(
-      item, 'colorBackground'
+      item, 'colorBackground',
     )?.params;
     if (backgroundColor) {
       const backgroundColorDefault = H5PEditor
@@ -154,7 +154,7 @@ export default class PhraseRandomizerTextualEditor {
 
     this.wrapper.append(this.inputField);
     this.wrapper.classList.add(
-      'h5p-editor-phrase-randomizer-textual-editor'
+      'h5p-editor-phrase-randomizer-textual-editor',
     );
   }
 
@@ -177,7 +177,7 @@ export default class PhraseRandomizerTextualEditor {
     // Get l10n from H5P core if available to keep uniform translations
     let translations = this.getH5PCoreL10ns([
       { local: 'helpTextTitleMain', h5pCore: 'importantInstructions' },
-      { local: 'helpTextTitleExample', h5pCore: 'example' }
+      { local: 'helpTextTitleExample', h5pCore: 'example' },
     ]);
 
     for (const key in plainTranslations) {
@@ -201,7 +201,7 @@ export default class PhraseRandomizerTextualEditor {
     translations = this.sanitizeTranslations(translations);
 
     this.dictionary.fill(translations, {
-      markdownToHTML: ['helpTextIntroduction']
+      markdownToHTML: ['helpTextIntroduction'],
     });
   }
 
@@ -237,9 +237,10 @@ export default class PhraseRandomizerTextualEditor {
       l10n: {
         helpTextTitleMain: 'Important instructions',
         helpTextTitleExample: 'Example',
+        // eslint-disable-next-line @stylistic/js/max-len
         helpTextIntroduction: 'Create blocks of segments, where each block is separated by an empty line.<br />In each block each line represents an option for the segment.<br />The title can optionally be set by starting the line with <em>title=</em> followed by the title.<br />The optional segment background color can be set by starting the line with <em>color=</em> followed by a color code, e.g. rgb(255, 0, 0) or #ff0000.',
-        helpTextExample: 'strawberry\nraspberry\ncloudberry\ntitle=berry name\ncolor=#c69e3b\n\npie\nyoghurt\njam'
-      }
+        helpTextExample: 'strawberry\nraspberry\ncloudberry\ntitle=berry name\ncolor=#c69e3b\n\npie\nyoghurt\njam',
+      },
     }, translations);
   }
 
@@ -256,14 +257,14 @@ export default class PhraseRandomizerTextualEditor {
     // Body with description and example
     const introductionText = Util.markdownToHTML(
       this.dictionary.get('l10n.helpTextIntroduction'),
-      { separateWithBR: true }
+      { separateWithBR: true },
     );
     const description = `<div class="description">${introductionText}</div>`;
 
     const exampleTitle = `<div class="example-title">${this.dictionary.get('l10n.helpTextTitleExample')}</div>`;
     const exampleText = Util.markdownToHTML(
       this.dictionary.get('l10n.helpTextExample'),
-      { separateWithBR: true }
+      { separateWithBR: true },
     );
     const exampleTextDOM = `<div class="example-text">${exampleText}</div>`;
     const example = `<div class="example">${exampleTitle}${exampleTextDOM}</div>`;

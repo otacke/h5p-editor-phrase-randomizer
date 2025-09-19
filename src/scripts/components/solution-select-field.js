@@ -14,23 +14,23 @@ export default class PhraseRandomizerSolutionSelectField {
     this.params = Util.extend({}, params);
 
     this.callbacks = Util.extend({
-      onChanged: () => {}
+      onChanged: () => {},
     }, callbacks);
 
     this.dom = document.createElement('div');
     this.dom.classList.add(
-      'h5p-editor-phrase-randomizer-solution-select-field'
+      'h5p-editor-phrase-randomizer-solution-select-field',
     );
 
     this.title = document.createElement('div');
     this.title.classList.add(
-      'h5p-editor-phrase-randomizer-solution-select-title'
+      'h5p-editor-phrase-randomizer-solution-select-title',
     );
     this.dom.append(this.title);
 
     this.selectDOM = document.createElement('select');
     this.selectDOM.classList.add(
-      'h5p-editor-phrase-randomizer-solution-select-field-select'
+      'h5p-editor-phrase-randomizer-solution-select-field-select',
     );
     this.selectDOM.selectedIndex = -1;
     this.dom.append(this.selectDOM);
@@ -98,7 +98,7 @@ export default class PhraseRandomizerSolutionSelectField {
   handleChanged() {
     this.callbacks.onChanged({
       segmentIndex: this.params.id,
-      optionIndex: this.selectDOM.selectedIndex
+      optionIndex: this.selectDOM.selectedIndex,
     });
   }
 }
