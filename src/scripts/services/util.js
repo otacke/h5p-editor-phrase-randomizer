@@ -1,6 +1,6 @@
 import Color from 'color';
 import { decode, encode } from 'he';
-import showdown from 'showdown';
+import { marked } from 'marked';
 
 /** Class for utility functions */
 export default class Util {
@@ -113,8 +113,7 @@ export default class Util {
    * @returns {string} HTML text.
    */
   static markdownToHTML(markdown, options = {}) {
-    const converter = new showdown.Converter();
-    let html = converter.makeHtml(markdown);
+    let html = marked.parse(markdown);
 
     if (options.separateWithBR) {
       html = html
